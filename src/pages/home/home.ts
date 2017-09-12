@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
+
+declare var google;
 
 @Component({
   selector: 'page-home',
@@ -8,8 +10,27 @@ import { LocationTrackerProvider } from '../../providers/location-tracker/locati
 })
 export class HomePage {
 
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+
   constructor(public navCtrl: NavController, public locationTracker: LocationTrackerProvider) {
 
+  }
+
+  ionViewDidLoad() {
+      this.loadMap();
+  }
+
+  loadMap() {
+    let latLng = new google.maps.LatLng(-34.9290, 138.6010);
+
+    let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
 
   start() {
