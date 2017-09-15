@@ -24,7 +24,7 @@ export class HomePage {
   }
 
   loadMap() {
-    let latLng = new google.maps.LatLng(-34.9290, 138.6010);
+    let latLng = new google.maps.LatLng(37.3302, -122.0277);
 
     let mapOptions = {
         center: latLng,
@@ -38,6 +38,8 @@ export class HomePage {
   }
 
   addMarker() {
+    this.stop();
+
     let marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
@@ -51,6 +53,8 @@ export class HomePage {
     let content = "<h4>Information</h4>";
 
     this.addInfoWindow(marker, content);
+
+    this.start();
   }
 
   addInfoWindow(marker, content) {
