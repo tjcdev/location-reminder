@@ -45,8 +45,7 @@ export class HomePage {
     });
 
     //Add marker to the array of markers
-    this.mapMarkers.push(this.map.getCenter());
-    
+    this.mapMarkers.push(marker.position);
 
     let content = "<h4>Information</h4>";
 
