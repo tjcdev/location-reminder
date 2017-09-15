@@ -58,14 +58,13 @@ export class LocationTrackerProvider {
 
       this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
 
-          /*
           for(let i=0; i < this.mapMarkers.length; i++) {
               if(this.distance(this.mapMarkers[i].lat(), this.mapMarkers[i].lng(), position.coords.latitude, position.coords.longitude) < 50) {
                 console.log("aloha aloha");
               }
           }
-          */
-          
+
+
           //Run update inside of Angular's zone
           this.zone.run(() => {
               this.lat = position.coords.latitude;
@@ -74,6 +73,7 @@ export class LocationTrackerProvider {
 
       });
   }
+
 
 
   distance(lat1, lon1, lat2, lon2) {
