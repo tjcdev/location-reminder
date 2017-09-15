@@ -16,14 +16,18 @@ export class LocationTrackerProvider {
   public watch: any;
   public lat: number = 0;
   public lng: number = 0;
+  public mapMarkers: any[] = [];
 
   constructor(public zone: NgZone, private backgroundGeolocation : BackgroundGeolocation, private geolocation: Geolocation) {
 
   }
 
+  setMapMarkers(input) {
+      this.mapMarkers = input;
+  }
+
   startTracking() {
       //Background Tracking
-
       let config = {
         desiredAccuracy: 0,
         stationaryRadius: 20,
@@ -33,8 +37,6 @@ export class LocationTrackerProvider {
       };
 
       this.backgroundGeolocation.configure(config).subscribe((location) => {
-
-          console.log('BackgroundGeolocation: ' + location.latitude + ', ' + location.longitude);
 
           //Run update inside of Angular's zone
           this.zone.run(() => {
@@ -56,7 +58,10 @@ export class LocationTrackerProvider {
 
       this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
 
-          console.log(position);
+          if(this.mapMarkers.length > 0) {
+              console.log(position.coords.latitude - this.mapMarkers[0].lat());
+          };
+
 
           //Run update inside of Angular's zone
           this.zone.run(() => {
@@ -68,8 +73,6 @@ export class LocationTrackerProvider {
   }
 
   stopTracking() {
-        console.log('stopTracking');
-
         this.backgroundGeolocation.finish();
         this.watch.unsubscribe();
   }

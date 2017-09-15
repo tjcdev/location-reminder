@@ -46,6 +46,7 @@ export class HomePage {
 
     //Add marker to the array of markers
     this.mapMarkers.push(marker.position);
+    this.locationTracker.setMapMarkers(this.mapMarkers);
 
     let content = "<h4>Information</h4>";
 
