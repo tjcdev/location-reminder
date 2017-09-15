@@ -3,7 +3,6 @@ import { NavController } from 'ionic-angular';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 
 declare var google;
-declare var mapMarkers: any[];
 
 @Component({
   selector: 'page-home',
@@ -11,11 +10,12 @@ declare var mapMarkers: any[];
 })
 export class HomePage {
 
+
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  mapMarkers: any[] = [];
 
   constructor(public navCtrl: NavController, public locationTracker: LocationTrackerProvider) {
-
   }
 
   ionViewDidLoad() {
@@ -45,8 +45,8 @@ export class HomePage {
     });
 
     //Add marker to the array of markers
-    mapMarkers.push(marker.position);
-    console.log(mapMarkers);
+    this.mapMarkers.push(this.map.getCenter());
+    
 
     let content = "<h4>Information</h4>";
 
