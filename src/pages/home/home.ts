@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 declare var google;
 
@@ -15,7 +16,8 @@ export class HomePage {
   map: any;
   mapMarkers: any[] = [];
 
-  constructor(public navCtrl: NavController, public locationTracker: LocationTrackerProvider) {
+  constructor(public navCtrl: NavController, public locationTracker: LocationTrackerProvider, public nativeStorage: NativeStorage) {
+
   }
 
   ionViewDidLoad() {
@@ -49,6 +51,13 @@ export class HomePage {
     //Add marker to the array of markers
     this.mapMarkers.push(marker.position);
     this.locationTracker.setMapMarkers(this.mapMarkers);
+
+    //Save it to the devices internal storage
+    this.nativeStorage.setItem('mapMarkers', JSON.stringify(this.mapMarkers));
+
+    this.nativeStorage.getItem('mapMarkers').then(function (json) {
+        console.log(json);
+    });
 
     let content = "<h4>Information</h4>";
 

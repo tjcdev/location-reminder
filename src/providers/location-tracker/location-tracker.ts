@@ -4,6 +4,7 @@ import { BackgroundGeolocation, BackgroundGeolocationConfig } from '@ionic-nativ
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import 'rxjs/add/operator/filter';
 
+
 /*
   Generated class for the LocationTrackerProvider provider.
 
@@ -57,9 +58,6 @@ export class LocationTrackerProvider {
       };
 
       this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
-
-
-
 
           //Run update inside of Angular's zone
           this.zone.run(() => {
