@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { LocationTrackerProvider } from '../providers/location-tracker/location-tracker';
 import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     LocationTrackerProvider,
     BackgroundGeolocation,
     Geolocation,
+    NativeStorage,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
