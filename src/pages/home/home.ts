@@ -76,12 +76,7 @@ export class HomePage {
     });
   }
 
-  notify() {
-    this.localNotifications.schedule({
-      id: 1,
-      text: 'Single ILocalNotification',
-    });
-  }
+  
 
   start() {
     this.locationTracker.startTracking();

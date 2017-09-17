@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import { BackgroundGeolocation, BackgroundGeolocationConfig } from '@ionic-native/background-geolocation';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 import 'rxjs/add/operator/filter';
-
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 /*
   Generated class for the LocationTrackerProvider provider.
@@ -19,7 +19,7 @@ export class LocationTrackerProvider {
   public lng: number = 0;
   public mapMarkers: any[] = [];
 
-  constructor(public zone: NgZone, private backgroundGeolocation : BackgroundGeolocation, private geolocation: Geolocation) {
+  constructor(public zone: NgZone, private backgroundGeolocation : BackgroundGeolocation, private geolocation: Geolocation, private localNotifications: LocalNotifications) {
 
   }
 
@@ -67,6 +67,8 @@ export class LocationTrackerProvider {
               for(let i=0; i < this.mapMarkers.length; i++) {
                   if(this.distance(this.mapMarkers[i].lat(), this.mapMarkers[i].lng(), position.coords.latitude, position.coords.longitude) < 20000) {
                     console.log("aloha aloha");
+                    //Cause notifications
+                    this.notify();
                   }
               }
           });
@@ -74,7 +76,12 @@ export class LocationTrackerProvider {
       });
   }
 
-
+  notify() {
+    this.localNotifications.schedule({
+      id: 1,
+      text: 'Single ILocalNotification',
+    });
+  }
 
   distance(lat1, lon1, lat2, lon2) {
       var p = 0.017453292519943295;    // Math.PI / 180
