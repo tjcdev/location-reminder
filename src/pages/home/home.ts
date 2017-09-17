@@ -16,6 +16,7 @@ export class HomePage {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   mapMarkers: any[] = [];
+  notifications: any[] = [];
 
   constructor(public navCtrl: NavController, public locationTracker: LocationTrackerProvider, public nativeStorage: NativeStorage, public localNotifications: LocalNotifications) {
 
@@ -72,6 +73,13 @@ export class HomePage {
 
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
+    });
+  }
+
+  notify() {
+    this.localNotifications.schedule({
+      id: 1,
+      text: 'Single ILocalNotification',
     });
   }
 
