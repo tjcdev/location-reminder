@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 declare var google;
 
@@ -16,7 +17,7 @@ export class HomePage {
   map: any;
   mapMarkers: any[] = [];
 
-  constructor(public navCtrl: NavController, public locationTracker: LocationTrackerProvider, public nativeStorage: NativeStorage) {
+  constructor(public navCtrl: NavController, public locationTracker: LocationTrackerProvider, public nativeStorage: NativeStorage, public localNotifications: LocalNotifications) {
 
   }
 
@@ -33,8 +34,6 @@ export class HomePage {
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     }
-
-
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
