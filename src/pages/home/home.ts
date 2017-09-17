@@ -56,7 +56,7 @@ export class HomePage {
     this.nativeStorage.setItem('mapMarkers', JSON.stringify(this.mapMarkers));
 
     this.nativeStorage.getItem('mapMarkers').then(function (json) {
-        console.log("Thing" + json);
+        console.log("Stored" + json);
     });
 
     let content = "<h4>Information</h4>";
