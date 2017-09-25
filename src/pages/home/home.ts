@@ -17,6 +17,7 @@ export class HomePage {
   map: any;
   mapMarkers: any[] = [];
   notifications: any[] = [];
+  public tracking: boolean = false;
 
   constructor(public navCtrl: NavController, public locationTracker: LocationTrackerProvider, public nativeStorage: NativeStorage, public localNotifications: LocalNotifications) {
 
@@ -76,7 +77,15 @@ export class HomePage {
     });
   }
 
-  
+  toggleTracking() {
+    if (this.tracking) {
+      this.stop();
+      this.tracking = false;
+    } else {
+      this.start();
+      this.tracking = true;
+    }
+  }
 
   start() {
     this.locationTracker.startTracking();
