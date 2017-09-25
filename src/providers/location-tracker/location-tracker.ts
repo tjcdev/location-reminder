@@ -34,7 +34,7 @@ export class LocationTrackerProvider {
         stationaryRadius: 20,
         distanceFilter: 10,
         debug: true,
-        interval: 2000
+        interval: 10000
       };
 
       this.backgroundGeolocation.configure(config).subscribe((location) => {
@@ -65,8 +65,7 @@ export class LocationTrackerProvider {
               this.lng = position.coords.longitude;
 
               for(let i=0; i < this.mapMarkers.length; i++) {
-                  if(this.distance(this.mapMarkers[i].lat(), this.mapMarkers[i].lng(), position.coords.latitude, position.coords.longitude) < 20000) {
-                    console.log("aloha aloha");
+                  if(this.distance(this.mapMarkers[i].lat(), this.mapMarkers[i].lng(), position.coords.latitude, position.coords.longitude) < 0.2) {
                     //Cause notifications
                     this.notify();
                   }
