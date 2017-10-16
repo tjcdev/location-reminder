@@ -24,7 +24,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-      this.locationTracker.startTracking();
+      //this.locationTracker.startTracking();
       this.loadMap();
   }
 
@@ -41,7 +41,7 @@ export class HomePage {
   }
 
   addMarker() {
-    this.stop();
+    //this.stop();
 
     let marker = new google.maps.Marker({
         map: this.map,
@@ -64,7 +64,7 @@ export class HomePage {
 
     this.addInfoWindow(marker, content);
 
-    this.start();
+    //this.start();
   }
 
   addInfoWindow(marker, content) {
@@ -79,9 +79,11 @@ export class HomePage {
 
   toggleTracking() {
     if (this.tracking) {
+      console.log("stop tracking");
       this.stop();
       this.tracking = false;
     } else {
+      console.log("start tracking");
       this.start();
       this.tracking = true;
     }

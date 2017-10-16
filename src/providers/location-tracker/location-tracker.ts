@@ -27,18 +27,26 @@ export class LocationTrackerProvider {
       this.mapMarkers = input;
   }
 
+  on_success(position) {
+    console.log("success");
+  }
+
+  on_error(err) {
+    console.log("success");
+  }
+
   startTracking() {
       //Background Tracking
       let config = {
-        desiredAccuracy: 0,
-        stationaryRadius: 20,
-        distanceFilter: 10,
+        desiredAccuracy: 200,
+        stationaryRadius: 200,
+        distanceFilter: 100,
         debug: true,
-        interval: 10000
+        interval: 20000
       };
 
       this.backgroundGeolocation.configure(config).subscribe((location) => {
-
+          console.log("Updating our position for background");
           //Run update inside of Angular's zone
           this.zone.run(() => {
               this.lat = location.latitude;
@@ -53,14 +61,29 @@ export class LocationTrackerProvider {
 
       //Foreground Tracking
       let options = {
-          frequency: 10000,
-          enableHighAccuracy: true
+          frequency: 20000,
+          enableHighAccuracy: false
       };
+
+      let watch = this.geolocation.watchPosition();
+      watch.subscribe((data) => {
+       // data can be a set of coordinates, or an error (if an error occurred).
+       // data.coords.latitude
+       // data.coords.longitude
+       console.log("getting an update on the position");
+      });
+
+      //navigator.geolocation.watchPosition(on_success,on_error,watchOptions);
+      /*this.geolocation.watchPosition(this.on_success, this.on_error, options);
+
+
 
       this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
 
           //Run update inside of Angular's zone
           this.zone.run(() => {
+              console.log("Updating our position for foreground");
+
               this.lat = position.coords.latitude;
               this.lng = position.coords.longitude;
 
@@ -68,17 +91,19 @@ export class LocationTrackerProvider {
                   if(this.distance(this.mapMarkers[i].lat(), this.mapMarkers[i].lng(), position.coords.latitude, position.coords.longitude) < 0.2) {
                     //Cause notifications
                     this.notify();
+                    this.mapMarkers.splice(i, 1);
                   }
               }
           });
 
       });
+      */
   }
 
   notify() {
     this.localNotifications.schedule({
       id: 1,
-      text: 'Single ILocalNotification',
+      text: 'Reminder - you are near a marker',
     });
   }
 
