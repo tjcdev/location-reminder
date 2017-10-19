@@ -53,11 +53,11 @@ export class LocationTrackerProvider {
               this.lng = location.longitude;
           });
       }, (err) => {
-            console.log(err);
+            console.log("Error experienced" + err);
       });
 
       //Turn ON the background-geolocation system.
-      this.backgroundGeolocation.start();
+      //this.backgroundGeolocation.start();
 
       //Foreground Tracking
       let options = {
@@ -72,11 +72,6 @@ export class LocationTrackerProvider {
        // data.coords.longitude
        console.log("getting an update on the position");
       });
-
-      //navigator.geolocation.watchPosition(on_success,on_error,watchOptions);
-      /*this.geolocation.watchPosition(this.on_success, this.on_error, options);
-
-
 
       this.watch = this.geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
 
@@ -97,7 +92,6 @@ export class LocationTrackerProvider {
           });
 
       });
-      */
   }
 
   notify() {
