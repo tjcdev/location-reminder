@@ -60,7 +60,9 @@ export class HomePage {
         console.log("Stored" + json);
     });
 
-    let content = "<h4>Information</h4>";
+    var marker_label = this.reminderMessage;
+
+    let content = marker_label;
 
     this.addInfoWindow(marker, content);
 

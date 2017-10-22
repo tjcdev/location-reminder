@@ -11,7 +11,10 @@
 
 <ion-content padding>
   <div class="container">
-      <button ion-button full primary (click)="addMarker()"><ion-icon name="add"></ion-icon> Add Marker</button>
+      <ion-item>
+        <ion-input item-left [(ngModel)]="reminderMessage" type="text" placeholder="Reminder"></ion-input>
+        <button item-right ion-button primary (click)="addMarker()"><ion-icon name="add"></ion-icon></button>
+      </ion-item>
       <div #map id="map"></div>
   </div>
 </ion-content>
