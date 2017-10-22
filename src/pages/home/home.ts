@@ -15,6 +15,7 @@ export class HomePage {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  fullMarkers: any[] = [];
   mapMarkers: any[] = [];
   notifications: any[] = [];
   public tracking: boolean = false;
@@ -40,7 +41,7 @@ export class HomePage {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
 
-  addMarker() {
+  addMarker(marker_label) {
     //this.stop();
 
     let marker = new google.maps.Marker({
@@ -49,9 +50,12 @@ export class HomePage {
         position: this.map.getCenter()
     });
 
+    this.fullMarkers.push(marker);
+    
     //Add marker to the array of markers
     this.mapMarkers.push(marker.position);
     this.locationTracker.setMapMarkers(this.mapMarkers);
+    this.locationTracker.setFullMarkers(this.fullMarkers);
 
     //Save it to the devices internal storage
     this.nativeStorage.setItem('mapMarkers', JSON.stringify(this.mapMarkers));
@@ -60,13 +64,15 @@ export class HomePage {
         console.log("Stored" + json);
     });
 
-    var marker_label = this.reminderMessage;
-
     let content = marker_label;
 
     this.addInfoWindow(marker, content);
 
     //this.start();
+  }
+
+  removeMarker(index) {
+      this.fullMarkers[index].setMap(null);
   }
 
   addInfoWindow(marker, content) {

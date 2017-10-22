@@ -13,7 +13,7 @@
   <div class="container">
       <ion-item>
         <ion-input item-left [(ngModel)]="reminderMessage" type="text" placeholder="Reminder"></ion-input>
-        <button item-right ion-button primary (click)="addMarker()"><ion-icon name="add"></ion-icon></button>
+        <button item-right ion-button primary (click)="addMarker(reminderMessage)"><ion-icon name="add"></ion-icon></button>
       </ion-item>
       <div #map id="map"></div>
   </div>

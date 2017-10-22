@@ -18,6 +18,7 @@ export class LocationTrackerProvider {
   public lat: number = 0;
   public lng: number = 0;
   public mapMarkers: any[] = [];
+  public fullMarkers: any[] = [];
 
   constructor(public zone: NgZone, private backgroundGeolocation : BackgroundGeolocation, private geolocation: Geolocation, private localNotifications: LocalNotifications) {
 
@@ -25,6 +26,10 @@ export class LocationTrackerProvider {
 
   setMapMarkers(input) {
       this.mapMarkers = input;
+  }
+
+  setFullMarkers(input) {
+      this.fullMarkers = input;
   }
 
   on_success(position) {
@@ -87,6 +92,7 @@ export class LocationTrackerProvider {
                     //Cause notifications
                     this.notify();
                     this.mapMarkers.splice(i, 1);
+                    this.fullMarkers[i].setMap(null);
                   }
               }
           });
