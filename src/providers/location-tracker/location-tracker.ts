@@ -90,7 +90,7 @@ export class LocationTrackerProvider {
               for(let i=0; i < this.mapMarkers.length; i++) {
                   if(this.distance(this.mapMarkers[i].lat(), this.mapMarkers[i].lng(), position.coords.latitude, position.coords.longitude) < 0.2) {
                     //Cause notifications
-                    this.notify();
+                    this.notify(this.fullMarkers[i].label);
                     this.mapMarkers.splice(i, 1);
                     this.fullMarkers[i].setMap(null);
                   }
@@ -100,10 +100,10 @@ export class LocationTrackerProvider {
       });
   }
 
-  notify() {
+  notify(label) {
     this.localNotifications.schedule({
       id: 1,
-      text: 'Reminder - you are near a marker',
+      text: label,
     });
   }
 

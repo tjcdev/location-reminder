@@ -47,11 +47,12 @@ export class HomePage {
     let marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
-        position: this.map.getCenter()
+        position: this.map.getCenter(),
+        label: marker_label
     });
 
     this.fullMarkers.push(marker);
-    
+
     //Add marker to the array of markers
     this.mapMarkers.push(marker.position);
     this.locationTracker.setMapMarkers(this.mapMarkers);
